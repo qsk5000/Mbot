@@ -4,7 +4,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // --- الإعدادات الخاصة بك ---
 const BOT_TOKEN = "8664749931:AAGLnIHnBew-hxzcLp1jjchTnIdHNVAGBl8";
-const GEMINI_API_KEY = "AIzaSyBqce2gW49wyyyw76qaGvhtSONREsKTzYk";
+const GEMINI_API_KEY = "AIzaSyBqce2gW49wyyyw76qaGvhtSONREsKTzYk"; 
+
 
 const bot = new Telegraf(BOT_TOKEN);
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
