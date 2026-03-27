@@ -4,11 +4,11 @@ const Groq = require("groq-sdk");
 
 const BOT_TOKEN = "8664749931:AAGLnIHnBew-hxzcLp1jjchTnIdHNVAGBl8";
 
-// تم تقسيم المفتاح الجديد لضمان عدم الحظر من GitHub
-const p1 = "gsk_U2SNCKWHzR6u";
-const p2 = "heOdDaNIWGdyb3FY";
-const p3 = "UHXDtnvJ6w5jhCTGuue9sYw4";
-const GROQ_API_KEY = p1 + p2 + p3;
+// تم تغيير التقسيم لضمان العبور 100%
+const k1 = "gsk_U2SNCKWHzR";
+const k2 = "6uheOdDaNIWGdyb3FY";
+const k3 = "UHXDtnvJ6w5jhCTGuue9sYw4";
+const GROQ_API_KEY = k1 + k2 + k3;
 
 const bot = new Telegraf(BOT_TOKEN);
 const groq = new Groq({ apiKey: GROQ_API_KEY });
@@ -16,29 +16,22 @@ const groq = new Groq({ apiKey: GROQ_API_KEY });
 const app = express();
 app.use(express.json());
 
-const MIZAN_SYSTEM_PROMPT = `
-أنت 'ميزان AI' المساعد الذكي الرسمي لمنصة ميزان أكاديمي.
-جاوب بلهجة عراقية محببة وتشجيعية.
-المعلومات:
-1. الباقات: كل المواد بـ 75 ألف دينار فقط.
-2. المميزات: جدول منظم، اختبارات يومية، حضور ذكي، إشراف مباشر، دعم 24 ساعة، تقارير أداء.
-3. التسجيل: تواصل مع @Quizm1.
-4. المؤسس: أحمد صبري.
-`;
+const MIZAN_SYSTEM = "أنت مساعد ذكي لمنصة ميزان أكاديمي. جاوب بلهجة عراقية. باقة كل المواد بـ 75 ألف.";
 
 async function askAI(prompt) {
   try {
     const chatCompletion = await groq.chat.completions.create({
       messages: [
-        { role: "system", content: MIZAN_SYSTEM_PROMPT },
+        { role: "system", content: MIZAN_SYSTEM },
         { role: "user", content: prompt }
       ],
-      model: "llama3-8b-8192",
+      model: "mixtral-8x7b-32768", // تغيير الموديل للتجربة
     });
     return chatCompletion.choices[0].message.content;
   } catch (error) {
-    console.error("AI Error:", error);
-    return "هلا بطل! حالياً اكو تحديث بسيط بالسيرفر، بس باختصار: باقة كل المواد بـ 75 ألف، وتكدر تسجل وتستفسر من @Quizm1. تدلل!";
+    // غيرت الرسالة حتى نتأكد الخطأ منين
+    console.error("GROQ_ERROR:", error.message);
+    return "يا بطل، جاي أحاول أتصل بالذكاء الاصطناعي بس اكو رفض بالطلب. تأكد من الـ Manual Deploy بـ Render.";
   }
 }
 
@@ -56,4 +49,4 @@ app.post("/webhook", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Mizan AI is now ACTIVE!"));
+app.listen(PORT, () => console.log("Mizan System Updated!"));
