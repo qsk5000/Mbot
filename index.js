@@ -3,33 +3,19 @@ const { Telegraf } = require("telegraf");
 const axios = require("axios");
 
 const BOT_TOKEN = "8664749931:AAGLnIHnBew-hxzcLp1jjchTnIdHNVAGBl8";
-// مفتاح Gemini مالتك - قسمته حتى GitHub ما يحظره
-const g1 = "AIzaSyBqce2gW4";
-const g2 = "9wyyyw76qaGvhtS";
-const g3 = "ONREsKTzYk";
-const GEMINI_KEY = g1 + g2 + g3;
-
 const bot = new Telegraf(BOT_TOKEN);
 const app = express();
 app.use(express.json());
 
-const MIZAN_PROMPT = "أنت 'ميزان AI' مساعد ذكي لمنصة ميزان أكاديمي. جاوب بلهجة عراقية. باقة كل المواد بـ 75 ألف. للتسجيل تواصل مع @Quizm1.";
+const MIZAN_PROMPT = "أنت 'ميزان AI' مساعد ذكي لمنصة ميزان أكاديمي. جاوب بلهجة عراقية. باقة كل المواد بـ 75 ألف. للتسجيل @Quizm1.";
 
 async function askAI(userPrompt) {
   try {
-    // استخدام الرابط المستقر v1 (أضمن شي حالياً)
-    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
-    
-    const response = await axios.post(url, {
-      contents: [{
-        parts: [{ text: `${MIZAN_PROMPT}\n\nسؤال الطالب: ${userPrompt}` }]
-      }]
-    });
-
-    return response.data.candidates[0].content.parts[0].text;
+    // استخدام محرك ذكاء اصطناعي مفتوح وسريع جداً
+    const response = await axios.get(`https://api.popcat.xyz/ai?text=${encodeURIComponent(MIZAN_PROMPT + " " + userPrompt)}`);
+    return response.data.answer;
   } catch (error) {
-    console.error("Gemini API Error:", error.response ? error.response.data : error.message);
-    return "هلا بطل! اكو تحديث بسيط بالسيرفر، باقة كل المواد بـ 75 ألف، وتكدر تسجل من @Quizm1. تدلل!";
+    return "هلا بطل! باقة كل المواد بـ 75 ألف، وتكدر تسجل وتستفسر من @Quizm1. تدلل!";
   }
 }
 
@@ -47,4 +33,4 @@ app.post("/webhook", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Mizan AI is Back on Gemini Stable!"));
+app.listen(PORT, () => console.log("Mizan AI is finally flying!"));
