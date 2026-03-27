@@ -1,11 +1,22 @@
 {
-  "name": "mbot-easy",
+  "name": "mizan-ai-bot",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": { "start": "node index.js" },
+  "description": "ميزان AI - مساعد ذكي لمنصة ميزان أكاديمي",
+  "main": "bot-final.js",
+  "scripts": {
+    "start": "node bot-final.js",
+    "dev": "nodemon bot-final.js"
+  },
+  "keywords": ["telegram", "bot", "ai", "claude", "mizan"],
+  "author": "Ahmed Sabri",
+  "license": "MIT",
   "dependencies": {
-    "telegraf": "^4.16.3",
-    "express": "^4.19.2",
-    "axios": "^1.6.7"
+    "express": "^4.18.2",
+    "telegraf": "^4.12.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
