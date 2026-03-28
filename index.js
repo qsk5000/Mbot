@@ -15,16 +15,16 @@ const MIZAN_PROMPT = "أنت 'ميزان AI' مساعد ذكي لمنصة ميز
 async function askAI(userPrompt) {
     try {
         const response = await axios.post(
-            "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct",
+            "https://router.huggingface.co/models/tiiuae/falcon-7b-instruct",
             {
                 inputs: `${MIZAN_PROMPT}\n\nسؤال المستخدم: ${userPrompt}`,
                 parameters: {
-                    max_new_tokens: 250,
+                    max_new_tokens: 250, // أفضل من max_length لتحديد طول الرد الجديد
                     temperature: 0.7,
-                    return_full_text: false // حتى يرجعلك بس الجواب بدون ما يعيد السؤال
+                    return_full_text: false // يمنع تكرار السؤال في الإجابة
                 },
                 options: {
-                    wait_for_model: true // مهم جداً حتى ما ينطيك خطأ Model Loading
+                    wait_for_model: true // ضروري حتى ينتظر الموديل إذا كان "نايم"
                 }
             },
             {
@@ -36,14 +36,16 @@ async function askAI(userPrompt) {
         );
 
         if (response.data && response.data[0]) {
+            // بما أننا استخدمنا return_full_text: false، النص الراجع هو الإجابة فقط
             let text = response.data[0].generated_text || "";
-            return text.trim() || "حصل خطأ، حاول لاحقا 😔";
+            return text.trim() || "حصل خطأ، حاول لاحقاً 😔";
         }
-        return "حصل خطأ، حاول لاحقا 😔";
+        return "حصل خطأ، حاول لاحقاً 😔";
         
     } catch (error) {
         console.error("HuggingFace Error:", error.response?.data || error.message);
-        return "هلا بطل! 🎓 باقة كل المواد بـ 75 ألف، وتكدر تسجل وتستفسر من @Quizm1. تدلل! 😊";
+        // رد احتياطي بلهجة المنصة في حال فشل الـ API
+        return "هلا بطل! 🎓 حالياً لود عليه، بس باقة كل المواد بـ 75 ألف، وتكدر تسجل وتستفسر من @Quizm1. تدلل! 😊";
     }
 }
 
@@ -65,17 +67,17 @@ bot.on("text", async (ctx) => {
 });
 
 app.post("/webhook", (req, res) => {
-    bot.handleUpdate(req.body);
+    bot.handleUpdate(req.body); // تليغراف لا يحتاج res هنا
     res.sendStatus(200);
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
-    console.log("Mizan AI (HuggingFace) is Active! 🤖");
+    console.log("Mizan AI (HuggingFace Router) is Active! 🤖");
     try {
         await bot.telegram.setWebhook(`${URL}/webhook`);
-        console.log("Webhook set successfully");
+        console.log("Webhook configured successfully");
     } catch (e) {
-        console.log("Webhook set error:", e.message);
+        console.log("Webhook setup failed:", e.message);
     }
 });
