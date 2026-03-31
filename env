@@ -1,0 +1,19 @@
+# ⚠️ تحذير أمان: لا تشارك هذا الملف مع أحد!
+# هذا الملف في .gitignore (ما يرفع على GitHub)
+
+# Telegram Bot Token
+# احصل عليه من: https://t.me/botfather
+BOT_TOKEN=your_telegram_bot_token_here
+
+# Groq API Key
+# احصل عليه من: https://console.groq.com
+GROQ_API_KEY=your_groq_api_key_here
+
+# Render Webhook URL
+WEBHOOK_URL=https://mbot-lst0.onrender.com
+
+# Server Port
+PORT=3000
+
+# Environment
+NODE_ENV=development
