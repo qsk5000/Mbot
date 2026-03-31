@@ -2,10 +2,10 @@
   "name": "mizan-ai-bot",
   "version": "2.0.0",
   "description": "Mizan AI Telegram Bot powered by Groq",
-  "main": "mizan_bot_groq.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node mizan_bot_groq.js",
-    "dev": "node mizan_bot_groq.js"
+    "start": "node index.js",
+    "dev": "node index.js"
   },
   "keywords": [
     "telegram",
