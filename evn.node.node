@@ -1,0 +1,11 @@
+# Telegram Bot Token
+BOT_TOKEN=8664749931:AAGLnIHnBew-hxzcLp1jjchTnIdHNVAGBl8
+
+# Groq API Key (احصل عليه من https://console.groq.com)
+GROQ_API_KEY=your_groq_api_key_here
+
+# Render Webhook URL
+WEBHOOK_URL=https://mbot-lst0.onrender.com
+
+# Server Port
+PORT=3000
