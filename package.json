@@ -1,22 +1,29 @@
 {
   "name": "mizan-ai-bot",
-  "version": "1.0.0",
-  "description": "ميزان AI - مساعد ذكي لمنصة ميزان أكاديمي",
-  "main": "bot-final.js",
+  "version": "2.0.0",
+  "description": "Mizan AI Telegram Bot powered by Groq",
+  "main": "mizan_bot_groq.js",
   "scripts": {
-    "start": "node bot-final.js",
-    "dev": "nodemon bot-final.js"
+    "start": "node mizan_bot_groq.js",
+    "dev": "node mizan_bot_groq.js"
   },
-  "keywords": ["telegram", "bot", "ai", "claude", "mizan"],
-  "author": "Ahmed Sabri",
+  "keywords": [
+    "telegram",
+    "bot",
+    "ai",
+    "groq",
+    "mizan"
+  ],
+  "author": "Mizan Academy",
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
-    "telegraf": "^4.12.0",
-    "axios": "^1.6.0",
+    "telegraf": "^4.15.0",
+    "axios": "^1.6.2",
     "dotenv": "^16.3.1"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+  "devDependencies": {},
+  "engines": {
+    "node": "18.x"
   }
 }
